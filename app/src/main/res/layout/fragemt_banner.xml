@@ -6,12 +6,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ViewFlipper
+        <android.support.v4.view.ViewPager
             android:background="@color/design_default_color_primary"
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="180dp">
-        </ViewFlipper>
+        </android.support.v4.view.ViewPager>
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicatordefault"
             android:layout_alignParentRight="true"
