@@ -18,5 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
+
+        <fragment
+            android:name="com.example.appnghenhc.Fragment.Fragemt_Playlist"
+            android:id="@+id/fragemtplaylist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </fragment>
     </LinearLayout>
 </ScrollView>
