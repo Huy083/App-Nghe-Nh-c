@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.appnghenhc.Adapter.PlaylistAdapter;
 import com.example.appnghenhc.Model.Playlist;
 import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIRetrofitClient;
@@ -30,7 +32,9 @@ public class Fragemt_Playlist extends Fragment {
 
     View view;
     ListView lvplaylist;
-    Text txttitleplaylist,txtviewxemthemplaylist;
+    TextView txttitleplaylist,txtviewxemthemplaylist;
+    PlaylistAdapter playlistAdapter;
+    ArrayList<Playlist> mangplaylist;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,8 +52,9 @@ public class Fragemt_Playlist extends Fragment {
         callback.enqueue(new Callback<List<Playlist>>() {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
-                ArrayList<Playlist> mangplaylist = (ArrayList<Playlist>) response.body();
-                Log.d("BBB",mangplaylist.get(0).getTen());
+                mangplaylist = (ArrayList<Playlist>) response.body();
+                playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_list_item_1,mangplaylist);
+                lvplaylist.setAdapter(playlistAdapter);
             }
 
             @Override
