@@ -25,5 +25,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
+
+        <fragment
+            android:name="com.example.appnghenhc.Fragment.Fragemt_ChuDe_TheLoai__ToDay"
+            android:id="@+id/fragemtchudetheloai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </fragment>
+
+        <fragment
+            android:name="com.example.appnghenhc.Fragment.Fragemt_Album_Hot"
+            android:id="@+id/fragemtalbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </fragment>
+
     </LinearLayout>
 </ScrollView>
