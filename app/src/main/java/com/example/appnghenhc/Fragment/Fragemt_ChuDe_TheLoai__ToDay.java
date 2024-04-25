@@ -39,7 +39,7 @@ public class Fragemt_ChuDe_TheLoai__ToDay extends Fragment {
         horizontalScrollView = view.findViewById(R.id.horizontalScrollview);
         txtxemthemchudetheloai = view.findViewById((R.id.textviewxemthem));
         GetData();
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     private void GetData() {
@@ -75,7 +75,7 @@ public class Fragemt_ChuDe_TheLoai__ToDay extends Fragment {
                     linearLayout.addView(cardView);
                 }
 
-                for(int j = 0 ; j < (chuDeArrayList.size()); j++){
+                for(int j = 0 ; j < theloaiArrayList.size(); j++){
                     CardView cardView = new CardView(getActivity());
                     cardView.setRadius(10);
                     ImageView imageView = new ImageView(getActivity());
