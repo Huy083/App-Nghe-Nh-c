@@ -1,6 +1,7 @@
 package com.example.appnghenhc.Service;
 
 import com.example.appnghenhc.Model.Album;
+import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.Model.Playlist;
 import com.example.appnghenhc.Model.Quangcao;
 import com.example.appnghenhc.Model.Theloaitrongngay;
@@ -23,5 +24,8 @@ public interface Dataservice {
 
     @GET("albumhot.php")
     Call<List<Album>> GetAlbumHot();
+
+    @GET("baihatduocthich.php")
+    Call<List<Baihat>> GetBaiHatHot();
 
 }
