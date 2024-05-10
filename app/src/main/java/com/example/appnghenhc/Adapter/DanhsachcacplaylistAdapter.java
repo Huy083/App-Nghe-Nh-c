@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.appnghenhc.Model.Playlist;
 import com.example.appnghenhc.R;
+import com.example.appnghenhc.activity.DanhsachbaihatActivity;
 import com.example.appnghenhc.activity.DanhsachcacplaylistActivity;
 import com.squareup.picasso.Picasso;
 
@@ -58,7 +59,7 @@ public class DanhsachcacplaylistAdapter extends RecyclerView.Adapter<Danhsachcac
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DanhsachcacplaylistActivity.class);
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
                     intent.putExtra("itemplaylist",mangplaylist.get(getPosition()));
                     context.startActivity(intent);
                 }
