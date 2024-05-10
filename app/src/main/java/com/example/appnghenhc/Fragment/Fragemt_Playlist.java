@@ -24,6 +24,7 @@ import com.example.appnghenhc.Service.APIRetrofitClient;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
 import com.example.appnghenhc.activity.DanhsachbaihatActivity;
+import com.example.appnghenhc.activity.DanhsachcacplaylistActivity;
 
 import org.w3c.dom.Text;
 
@@ -49,6 +50,13 @@ public class Fragemt_Playlist extends Fragment {
         txttitleplaylist = view.findViewById((R.id.textviewtitleplaylist));
         txtviewxemthemplaylist = view.findViewById((R.id.textviewviewmoreplaylist));
         GetData();
+        txtviewxemthemplaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DanhsachcacplaylistActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
