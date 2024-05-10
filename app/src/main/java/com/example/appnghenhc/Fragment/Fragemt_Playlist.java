@@ -1,5 +1,7 @@
 package com.example.appnghenhc.Fragment;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -20,6 +23,7 @@ import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIRetrofitClient;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
+import com.example.appnghenhc.activity.DanhsachbaihatActivity;
 
 import org.w3c.dom.Text;
 
@@ -57,7 +61,14 @@ public class Fragemt_Playlist extends Fragment {
                 mangplaylist = (ArrayList<Playlist>) response.body();
                 playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_list_item_1,mangplaylist);
                 lvplaylist.setAdapter(playlistAdapter);
-                setListViewHeightBasedOnChildren(lvplaylist);
+                lvplaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                        intent.putExtra("itemplaylist",mangplaylist.get(position));
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
