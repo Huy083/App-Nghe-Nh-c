@@ -21,6 +21,7 @@ import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
 import com.example.appnghenhc.activity.DanhsachbaihatActivity;
+import com.example.appnghenhc.activity.DanhsachtatcachudeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,6 +41,13 @@ public class Fragemt_ChuDe_TheLoai__ToDay extends Fragment {
         view = inflater.inflate(R.layout.fragemt_chude_theloai__today,container,false);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollview);
         txtxemthemchudetheloai = view.findViewById((R.id.textviewxemthem));
+        txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DanhsachtatcachudeActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }
