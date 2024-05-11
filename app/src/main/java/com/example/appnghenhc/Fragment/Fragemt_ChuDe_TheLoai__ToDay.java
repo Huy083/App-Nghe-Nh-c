@@ -1,6 +1,7 @@
 package com.example.appnghenhc.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -19,6 +20,7 @@ import com.example.appnghenhc.Model.Theloaitrongngay;
 import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
+import com.example.appnghenhc.activity.DanhsachbaihatActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -86,6 +88,15 @@ public class Fragemt_ChuDe_TheLoai__ToDay extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    int finalJ = j;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                            intent.putExtra("idtheloai",theloaiArrayList.get(finalJ));
+                            startActivity(intent);
+                        }
+                    });
                 }
                 horizontalScrollView.addView(linearLayout);
             }

@@ -22,6 +22,7 @@ import com.example.appnghenhc.Adapter.DanhsachbaihatAdapter;
 import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.Model.Playlist;
 import com.example.appnghenhc.Model.Quangcao;
+import com.example.appnghenhc.Model.TheLoai;
 import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
@@ -50,6 +51,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     ArrayList<Baihat> mangbaihat;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     Playlist playlist;
+    TheLoai theLoai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,29 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             setValueInView(playlist.getTen(),playlist.getHinhPlaylist());
             GetDataPlaylist(playlist.getIdPlaylist());
         }
+        if(theLoai != null && !theLoai.getTenTheLoai().equals("")){
+            setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
+            GetDataTheLoai(theLoai.getIdTheLoai());
+        }
+    }
+
+    private void GetDataTheLoai(String idtheloai){
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> callback = dataservice.GetDanhsachbaihattheotheloai(idtheloai);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataPlaylist(String idplaylist) {
@@ -154,6 +179,9 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
             if(intent.hasExtra("itemplaylist")){
                 playlist = (Playlist) intent.getSerializableExtra("itemplaylist");
+            }
+            if(intent.hasExtra("idtheloai")){
+                theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
             }
         }
     }
