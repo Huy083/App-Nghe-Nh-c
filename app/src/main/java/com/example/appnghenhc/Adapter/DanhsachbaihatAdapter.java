@@ -8,11 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.R;
+import com.example.appnghenhc.Service.APIService;
+import com.example.appnghenhc.Service.Dataservice;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder>{
 
@@ -54,6 +61,32 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
             txtindex = itemView.findViewById(R.id.textviewdanhsachindex);
             txttenbaihat = itemView.findViewById(R.id.textviewtenbaihat);
             imgluotthich = itemView.findViewById(R.id.imageviewluotthichdanhsachbaihat);
+            imgluotthich.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Toast.makeText(context, mangbaihathot.get(getAdapterPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
+                    imgluotthich.setImageResource(R.drawable.iconloved);
+                    Dataservice dataservice = APIService.getService();
+                    Call<String> callback = dataservice.UpdateLuotThich("1",mangbaihat.get(getAdapterPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua = response.body();
+                            if(ketqua.equals("Success")){
+                                Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(context, "Lỗi!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgluotthich.setEnabled(false);
+                }
+            });
         }
     }
 }
