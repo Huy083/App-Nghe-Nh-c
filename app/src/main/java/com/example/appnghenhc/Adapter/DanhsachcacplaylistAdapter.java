@@ -60,7 +60,7 @@ public class DanhsachcacplaylistAdapter extends RecyclerView.Adapter<Danhsachcac
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-                    intent.putExtra("itemplaylist",mangplaylist.get(getPosition()));
+                    intent.putExtra("itemplaylist",mangplaylist.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });

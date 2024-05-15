@@ -1,6 +1,7 @@
 package com.example.appnghenhc.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.appnghenhc.Model.Album;
 import com.example.appnghenhc.R;
+import com.example.appnghenhc.activity.DanhsachbaihatActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,6 +55,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>{
             imghinhalbum = itemView.findViewById(R.id.imageviewalbum);
             txttenalbum = itemView.findViewById((R.id.textviewtenalbum));
             txtcasialbum = itemView.findViewById(R.id.textviewtencasialbum);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                    intent.putExtra("album",mangalbum.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

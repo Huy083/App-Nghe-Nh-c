@@ -60,7 +60,7 @@ public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<Danhsa
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-                    intent.putExtra("idtheloai",theLoaiArrayList.get(getPosition()));
+                    intent.putExtra("idtheloai",theLoaiArrayList.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });

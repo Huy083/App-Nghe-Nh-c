@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.appnghenhc.Adapter.DanhsachbaihatAdapter;
+import com.example.appnghenhc.Model.Album;
 import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.Model.Playlist;
 import com.example.appnghenhc.Model.Quangcao;
@@ -53,6 +54,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     Playlist playlist;
     TheLoai theLoai;
+    Album album;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,29 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
         GetDataTheLoai(theLoai.getIdTheLoai());
         }
+        if(album != null && !album.getTenAlbum().equals("")){
+            setValueInView(album.getTenAlbum(),album.getHinhanhAlbum());
+            GetDataAlbum(album.getIdAlbum());
+        }
+    }
+
+    private void GetDataAlbum(String idAlbum) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> callback = dataservice.GetDanhsachbaihattheoalbum(idAlbum);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +247,9 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
             if(intent.hasExtra("idtheloai")){
                 theLoai = (TheLoai) intent.getSerializableExtra("idtheloai");
+            }
+            if(intent.hasExtra("album")){
+                album = (Album) intent.getSerializableExtra("album");
             }
         }
     }

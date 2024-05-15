@@ -56,7 +56,7 @@ public class DanhsachtatcachudeAdapter extends RecyclerView.Adapter<Danhsachtatc
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, DanhsachtheloaitheochudeActivity.class);
-                    intent.putExtra("chude",mangchude.get(getPosition()));
+                    intent.putExtra("chude",mangchude.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });
