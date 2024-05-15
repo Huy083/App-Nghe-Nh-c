@@ -1,16 +1,15 @@
 package com.example.appnghenhc.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.appnghenhc.Adapter.AlbumAdapter;
@@ -18,6 +17,7 @@ import com.example.appnghenhc.Model.Album;
 import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
+import com.example.appnghenhc.activity.DanhsachtatcaAlbumActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,13 @@ public class Fragemt_Album_Hot extends Fragment {
         view = inflater.inflate(R.layout.franemt_album_hot,container,false);
         recyclerViewalbum = view.findViewById(R.id.relativeAlbum);
         txtxemthemalbum = view.findViewById(R.id.textviewxemthemAlbum);
+        txtxemthemalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DanhsachtatcaAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }
