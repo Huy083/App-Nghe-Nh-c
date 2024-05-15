@@ -1,6 +1,7 @@
 package com.example.appnghenhc.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.R;
 import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
+import com.example.appnghenhc.activity.PlayNhacActivity;
 
 import java.util.ArrayList;
 
@@ -85,6 +87,14 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
                         }
                     });
                     imgluotthich.setEnabled(false);
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc",mangbaihat.get(getAdapterPosition()));
+                    context.startActivity(intent);
                 }
             });
         }
