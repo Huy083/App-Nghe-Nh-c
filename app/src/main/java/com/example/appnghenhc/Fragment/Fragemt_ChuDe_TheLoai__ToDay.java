@@ -22,6 +22,7 @@ import com.example.appnghenhc.Service.APIService;
 import com.example.appnghenhc.Service.Dataservice;
 import com.example.appnghenhc.activity.DanhsachbaihatActivity;
 import com.example.appnghenhc.activity.DanhsachtatcachudeActivity;
+import com.example.appnghenhc.activity.DanhsachtheloaitheochudeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -83,6 +84,15 @@ public class Fragemt_ChuDe_TheLoai__ToDay extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    int finalI = i;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), DanhsachtheloaitheochudeActivity.class);
+                            intent.putExtra("chude",chuDeArrayList.get(finalI));
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 for(int j = 0 ; j < theloaiArrayList.size(); j++){

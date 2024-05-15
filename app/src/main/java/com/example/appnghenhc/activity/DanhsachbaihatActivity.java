@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -69,9 +70,28 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         }
         if(theLoai != null && !theLoai.getTenTheLoai().equals("")){
             setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
-            GetDataTheLoai(theLoai.getIdTheLoai());
+        GetDataTheLoai(theLoai.getIdTheLoai());
         }
     }
+
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_danhsachbaihat);
+//        DataIntent();
+//        anhxa();
+//        init();
+//        if(quangcao != null && quangcao.getTenBaiHat() != null && !quangcao.getTenBaiHat().isEmpty()){
+//            setValueInView(quangcao.getTenBaiHat(),quangcao.getHinhBaiHat());
+//            GetDataQuangCao(quangcao.getIdQuangCao());
+//        }
+//        if(playlist != null && playlist.getTen() != null && !playlist.getTen().isEmpty()){
+//            setValueInView(playlist.getTen(),playlist.getHinhPlaylist());//           GetDataPlaylist(playlist.getIdPlaylist());
+//        }
+//        if(theLoai != null && theLoai.getTenTheLoai() != null && !theLoai.getTenTheLoai().isEmpty()){
+//            setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
+//            GetDataTheLoai(theLoai.getIdTheLoai());
+//        }
+//    }
 
     private void GetDataTheLoai(String idtheloai){
         Dataservice dataservice = APIService.getService();
@@ -111,6 +131,25 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
 
+    private void setValueInView(String ten, String hinh) {
+        collapsingToolbarLayout.setTitle(ten);
+        try {
+            URL url = new URL(hinh);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+                collapsingToolbarLayout.setBackground(bitmapDrawable);
+            }
+        } catch (MalformedURLException e) {
+           e.printStackTrace();
+            //throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+        }
+        Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
+   }
+
     private void GetDataQuangCao(String idquangcao) {
         Dataservice dataservice = APIService.getService();
         Call<List<Baihat>> callback = dataservice.GetDanhsachbaihattheoquangcao(idquangcao);
@@ -131,20 +170,22 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
 
-    private void setValueInView(String ten, String hinh) {
-        collapsingToolbarLayout.setTitle(ten);
-        try {
-            URL url = new URL(hinh);
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
-            collapsingToolbarLayout.setBackground(bitmapDrawable);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
-    }
+//    private void setValueInView(String ten, String hinh) {
+//        collapsingToolbarLayout.setTitle(ten);
+//        try {
+//            URL url = new URL(hinh);
+//            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
+//            collapsingToolbarLayout.setBackground(bitmapDrawable);
+//        } catch (MalformedURLException e) {
+//            //e.printStackTrace();
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            //e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//        Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
+//    }
 
     private void init() {
         setSupportActionBar(toolbar);
@@ -159,7 +200,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 
     }
-
 
     private void anhxa() {
         coordinatorLayout = findViewById(R.id.coordinatorlayout);
