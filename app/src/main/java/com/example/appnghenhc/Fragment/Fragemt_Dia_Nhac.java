@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
 import com.example.appnghenhc.R;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +30,10 @@ public class Fragemt_Dia_Nhac extends Fragment {
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
         return view;
+    }
+    public void PlayNhac(String hinhanh){
+        Picasso.with(getContext()).load(hinhanh).into(circleImageView);
     }
 }
