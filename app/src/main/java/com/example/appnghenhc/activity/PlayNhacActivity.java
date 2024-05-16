@@ -13,6 +13,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appnghenhc.Adapter.ViewPagerPlaylistnhac;
+import com.example.appnghenhc.Fragment.Fragemt_Dia_Nhac;
+import com.example.appnghenhc.Fragment.Fragemt_Play_Danh_Sach_Cac_Bai_Hat;
 import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.R;
 
@@ -25,6 +28,9 @@ public class PlayNhacActivity extends AppCompatActivity {
     ImageButton imgplay,imgrepeat,imgnext,imgpre,imgrandom;
     ViewPager viewPagerplaynhac;
     public static ArrayList<Baihat> mangbaihat = new ArrayList<>();
+    public static ViewPagerPlaylistnhac adapternhac;
+    Fragemt_Dia_Nhac fragemt_dia_nhac;
+    Fragemt_Play_Danh_Sach_Cac_Bai_Hat fragemt_play_danh_sach_cac_bai_hat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,5 +89,11 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         });
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
+        fragemt_dia_nhac = new Fragemt_Dia_Nhac();
+        fragemt_play_danh_sach_cac_bai_hat = new Fragemt_Play_Danh_Sach_Cac_Bai_Hat();
+        adapternhac = new ViewPagerPlaylistnhac(getSupportFragmentManager());
+        adapternhac.AddFragment(fragemt_play_danh_sach_cac_bai_hat);
+        adapternhac.AddFragment(fragemt_dia_nhac);
+        viewPagerplaynhac.setAdapter(adapternhac);
     }
 }
