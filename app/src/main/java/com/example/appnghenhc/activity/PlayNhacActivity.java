@@ -24,20 +24,41 @@ public class PlayNhacActivity extends AppCompatActivity {
     SeekBar sktime;
     ImageButton imgplay,imgrepeat,imgnext,imgpre,imgrandom;
     ViewPager viewPagerplaynhac;
+    public static ArrayList<Baihat> mangbaihat = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_nhac);
         init();
+        GetDataFromIntent();
+//        Intent intent = getIntent();
+//        if(intent.hasExtra("cakhuc")){
+//            Baihat baihat = intent.getParcelableExtra("cakhuc");
+//            Toast.makeText(this, baihat.getTenbaihat(), Toast.LENGTH_SHORT).show();
+//        }
+//        if(intent.hasExtra("cacbaihat")){
+//            ArrayList<Baihat> mangbaihat = intent.getParcelableArrayListExtra("cacbaihat");
+//            for(int i=0;i<mangbaihat.size();i++){
+//                Log.d("BBB",mangbaihat.get(i).getTenbaihat());
+//            }
+//        }
+    }
+
+    private void GetDataFromIntent() {
         Intent intent = getIntent();
-        if(intent.hasExtra("cakhuc")){
-            Baihat baihat = intent.getParcelableExtra("cakhuc");
-            Toast.makeText(this, baihat.getTenbaihat(), Toast.LENGTH_SHORT).show();
-        }
-        if(intent.hasExtra("cacbaihat")){
-            ArrayList<Baihat> mangbaihat = intent.getParcelableArrayListExtra("cacbaihat");
-            for(int i=0;i<mangbaihat.size();i++){
-                Log.d("BBB",mangbaihat.get(i).getTenbaihat());
+        mangbaihat.clear();
+        if(intent!=null){
+            if(intent.hasExtra("cakhuc")){
+                Baihat baihat = intent.getParcelableExtra("cakhuc");
+                // Toast.makeText(this, baihat.getTenbaihat(), Toast.LENGTH_SHORT).show();
+                mangbaihat.add(baihat);
+            }
+            if(intent.hasExtra("cacbaihat")){
+                ArrayList<Baihat> baihatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
+//            for(int i=0;i<mangbaihat.size();i++){
+//                Log.d("BBB",mangbaihat.get(i).getTenbaihat());
+//            }
+                mangbaihat = baihatArrayList;
             }
         }
     }
