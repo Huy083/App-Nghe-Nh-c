@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.appnghenhc.Adapter.SearchBaiHatAdapter;
+import com.example.appnghenhc.Model.Baihat;
 import com.example.appnghenhc.R;
+import com.example.appnghenhc.Service.APIService;
+import com.example.appnghenhc.Service.Dataservice;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragemt_Tim_Kiem extends Fragment {
 
@@ -25,6 +37,7 @@ public class Fragemt_Tim_Kiem extends Fragment {
     Toolbar toolbar;
     RecyclerView recyclerViewsearchbaihat;
     TextView txtkhongcodulieu;
+    SearchBaiHatAdapter searchBaiHatAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,7 +60,8 @@ public class Fragemt_Tim_Kiem extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("BBB",query);
+                // Log.d("BBB",query);
+                SearchTuKhoaBaiHat(query);
                 return true;
             }
 
@@ -57,6 +71,33 @@ public class Fragemt_Tim_Kiem extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void SearchTuKhoaBaiHat(String query){
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> callback = dataservice.GetSearchBaihat(query);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                if(mangbaihat.size() > 0){
+                    searchBaiHatAdapter = new SearchBaiHatAdapter(getActivity(),mangbaihat);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    recyclerViewsearchbaihat.setLayoutManager(linearLayoutManager);
+                    recyclerViewsearchbaihat.setAdapter(searchBaiHatAdapter);
+                    txtkhongcodulieu.setVisibility(View.GONE);
+                    recyclerViewsearchbaihat.setVisibility(View.VISIBLE);
+                }else{
+                    recyclerViewsearchbaihat.setVisibility(View.GONE);
+                    txtkhongcodulieu.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 }
 

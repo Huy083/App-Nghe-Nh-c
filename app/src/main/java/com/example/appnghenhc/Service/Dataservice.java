@@ -65,4 +65,8 @@ public interface Dataservice {
     @POST("updateluotthich.php")
     @FormUrlEncoded
     Call<String> UpdateLuotThich(@Field("luotthich") String luotthich, @Field("idbaihat") String idbaihat);
+
+    @POST("searchbaihat.php")
+    @FormUrlEncoded
+    Call<List<Baihat>> GetSearchBaihat(@Field("tukhoa") String tukhoa);
 }
